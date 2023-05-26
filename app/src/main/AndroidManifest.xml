@@ -14,13 +14,34 @@
         android:theme="@style/Theme.GymGuru"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.DetailCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.CalendarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.VerificationTwoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.VerificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.UnlockActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -21,4 +21,18 @@
     <string name="register_email">Enter your Email</string>
     <string name="register_name">Enter your Name</string>
     <string name="register_have_account">Already have an account? <font color="#00C9B8">Login</font></string>
+
+    <string name="intro_one_desc">Healthy Together!</string>
+    <string name="intro_two_desc">Thank you for joining GymGuru. \nBy signing up, you are ready for a healthy life. Providing the best health knowledge for you is Our Top Priority.</string>
+    <string name="intro_three_desc">GymGuru is a mobile application that functions as a means of online learning in the health sector. Not only that, this application also provides an overview of gym equipment and recommendations on how to use it.</string>
+
+    <string name="tv_skip">Skip</string>
+    <string name="tv_next">Next</string>
+    <string name="tv_prev">Prev</string>
+    <string name="otp_code">OTP Code</string>
+    <string name="verif_email">Email</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="forward"><![CDATA[->]]></string>
+    <string name="back"><![CDATA[<-]]></string>
 </resources>

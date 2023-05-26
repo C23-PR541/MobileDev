@@ -1,4 +1,4 @@
-package com.bangkit.gymguru
+package com.bangkit.gymguru.ui
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator

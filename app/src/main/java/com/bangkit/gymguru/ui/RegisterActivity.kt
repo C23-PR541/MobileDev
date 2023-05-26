@@ -1,4 +1,4 @@
-package com.bangkit.gymguru
+package com.bangkit.gymguru.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
