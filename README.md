@@ -5,4 +5,11 @@
 Week 1 Progress :
 - Creating Illustration / Welcome Page
 - Creating Authentication Page (Register and Login)
--
+- Create Slide to Unlock and Intro Slider Page
+- Creating RecyclerView to display Calendar 
+
+Week 2 Progress :
+- Creating Detail Page for each Calendar
+- Creating a RecyclerView to display tasks for the month
+- Creating Detail Page for each Tasks
+- 
