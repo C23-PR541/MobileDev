@@ -1,5 +1,6 @@
 package com.bangkit.gymguru.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bangkit.gymguru.databinding.ActivityLoginBinding
@@ -13,6 +14,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, CalendarActivity::class.java))
+        }
     }
 }

@@ -17,10 +17,10 @@
             android:name=".ui.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DetailCalendarActivity"
+            android:name=".ui.CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CalendarActivity"
+            android:name=".ui.DetailCalendarActivity"
             android:exported="false" />
         <activity
             android:name=".ui.NewPasswordActivity"

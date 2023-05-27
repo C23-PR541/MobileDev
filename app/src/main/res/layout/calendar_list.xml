@@ -7,135 +7,47 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     card_view:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
         android:background="@color/calendar_background">
 
         <TextView
             android:id="@+id/month_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:gravity="center"
             android:textStyle="bold"
+            android:textColor="@color/black"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:text="Month" />
 
-        <LinearLayout
-            android:id="@+id/days_of_week_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/days_of_week_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            card_view:layout_constraintTop_toBottomOf="@+id/month_title"
-            card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.5">
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
 
-            <TextView
-                android:id="@+id/tv_sunday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="S"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_monday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="M"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_sunday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_tuesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="T"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_monday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_wednesday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="W"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_tuesday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_thursday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="T"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_wednesday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_friday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="F"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_thursday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-            <TextView
-                android:id="@+id/tv_saturday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="37.5dp"
-                android:text="S"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                card_view:layout_constraintStart_toEndOf="@id/tv_friday"
-                card_view:layout_constraintTop_toBottomOf="@+id/month_title" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_item_desc"
-            android:layout_width="275dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/days_of_week_layout"
-            tools:text="Dates" />
-
+            card_view:layout_constraintTop_toBottomOf="@+id/days_of_week_recycler_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
