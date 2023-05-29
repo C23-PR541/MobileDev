@@ -12,4 +12,5 @@ Week 2 Progress :
 - Creating Detail Page for each Calendar
 - Creating a RecyclerView to display tasks for the month
 - Creating Detail Page for each Tasks
+- Creating activity for classifying item and the result
 - 
