@@ -8,30 +8,24 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.data.ImageData
+import com.bangkit.gymguru.databinding.ItemSlideBinding
 
 class ImageSliderAdapter(private val imageDatas: List<ImageData>) :
     RecyclerView.Adapter<ImageSliderAdapter.ImageSliderViewHolder>() {
 
-    inner class ImageSliderViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        private val appName = view.findViewById<TextView>(R.id.app_name)
-        private val textTitle = view.findViewById<TextView>(R.id.tv_title)
-        private val imageIcon = view.findViewById<ImageView>(R.id.imageSlideIcon)
-
+    inner class ImageSliderViewHolder(private val binding: ItemSlideBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(imageData: ImageData){
-            appName.text = imageData.appName
-            textTitle.text = imageData.title
-            imageIcon.setImageResource(imageData.imageUrl)
+            binding.apply {
+                binding.appName.text = imageData.appName
+                binding.tvTitle.text = imageData.title
+                binding.imageSlideIcon.setImageResource(imageData.imageUrl)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageSliderViewHolder {
-        return ImageSliderViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_slide,
-                parent,
-                false
-            )
-        )
+        val binding = ItemSlideBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImageSliderViewHolder(binding)
     }
 
     override fun getItemCount(): Int {

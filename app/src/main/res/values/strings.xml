@@ -35,4 +35,10 @@
     <string name="confirm">Confirm</string>
     <string name="forward"><![CDATA[->]]></string>
     <string name="back"><![CDATA[<-]]></string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="classify">Classify</string>
+    <string name="tools_name">Tool\'s Name</string>
+    <string name="tutorial">Tutorial</string>
+    <string name="save">Save</string>
 </resources>

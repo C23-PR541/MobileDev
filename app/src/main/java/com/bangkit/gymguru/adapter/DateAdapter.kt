@@ -8,16 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
+import com.bangkit.gymguru.databinding.ItemDateBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateAdapter : RecyclerView.Adapter<DateAdapter.ViewHolder>() {
+class DateAdapter(private val dateClickListener: DateClickListener) : RecyclerView.Adapter<DateAdapter.ViewHolder>() {
 
     private var dates: List<String> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_date, parent, false)
-        return ViewHolder(view)
+        val binding = ItemDateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -29,21 +30,34 @@ class DateAdapter : RecyclerView.Adapter<DateAdapter.ViewHolder>() {
         return dates.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val dateTextView: TextView = itemView.findViewById(R.id.dateTextView)
+    interface DateClickListener {
+        fun onDateClicked(date: String)
+    }
 
+    inner class ViewHolder(private val binding: ItemDateBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val clickedDate = dates[position]
+                    dateClickListener.onDateClicked(clickedDate)
+                }
+            }
+        }
         fun bind(date: String) {
-            dateTextView.text = date
+            binding.apply {
+                binding.dateTextView.text = date
 
-            // Insert line break if it's Saturday
-            val layoutParams = dateTextView.layoutParams as ViewGroup.MarginLayoutParams
-            layoutParams.setMargins(0, 0, 0, 0)
-            dateTextView.layoutParams = layoutParams
+                val layoutParams = binding.dateTextView.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(0,0,0,0)
+                binding.dateTextView.layoutParams = layoutParams
 
-            if (isSaturday(date)) {
-                val newLayoutParams = dateTextView.layoutParams as ViewGroup.MarginLayoutParams
-                newLayoutParams.setMargins(0, 0, 0, 16.dpToPx(itemView.context)) // Adjust the margin as needed
-                dateTextView.layoutParams = newLayoutParams
+                if(isSaturday(date)){
+                    val newLayoutParams = binding.dateTextView.layoutParams as ViewGroup.MarginLayoutParams
+                    newLayoutParams.setMargins(0, 0, 0, 16.dpToPx(itemView.context)) // Adjust the margin as needed
+                    binding.dateTextView.layoutParams = newLayoutParams
+                }
             }
         }
 

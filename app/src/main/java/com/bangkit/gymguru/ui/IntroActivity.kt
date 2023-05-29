@@ -13,14 +13,16 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.adapter.ImageSliderAdapter
 import com.bangkit.gymguru.data.ImageData
+import com.bangkit.gymguru.databinding.ActivityIntroBinding
 
 class IntroActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityIntroBinding
     private lateinit var imageSliderAdapter: ImageSliderAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        binding = ActivityIntroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         imageSliderAdapter = ImageSliderAdapter(
             listOf(
@@ -42,7 +44,7 @@ class IntroActivity : AppCompatActivity() {
             )
         )
 
-        val introSliderViewPager: ViewPager2 = findViewById(R.id.introSliderViewPager)
+        val introSliderViewPager: ViewPager2 = binding.introSliderViewPager
         introSliderViewPager.adapter = imageSliderAdapter
         setupIndicators()
         setCurrentIndicator(0)
@@ -54,7 +56,7 @@ class IntroActivity : AppCompatActivity() {
                 setCurrentIndicator(position)
             }
         })
-        val tvNext: TextView = findViewById(R.id.tvNext)
+        val tvNext: TextView = binding.tvNext
         tvNext.setOnClickListener{
             if(introSliderViewPager.currentItem + 1 < imageSliderAdapter.itemCount){
                 introSliderViewPager.currentItem += 1
@@ -62,7 +64,7 @@ class IntroActivity : AppCompatActivity() {
                 startActivity(Intent(this, MainActivity::class.java))
             }
         }
-        val tvPrev: TextView = findViewById(R.id.tv_prev)
+        val tvPrev: TextView = binding.tvPrev
         tvPrev.setOnClickListener {
             if (introSliderViewPager.currentItem > 0) {
                 introSliderViewPager.currentItem -= 1
@@ -70,14 +72,14 @@ class IntroActivity : AppCompatActivity() {
                 startActivity(Intent(this, UnlockActivity::class.java))
             }
         }
-        val tvSkip: TextView = findViewById(R.id.tv_skip)
+        val tvSkip: TextView = binding.tvSkip
         tvSkip.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
     private fun setupIndicators(){
-        val dotsIndicator: LinearLayout = findViewById(R.id.dotsIndicator)
+        val dotsIndicator: LinearLayout = binding.dotsIndicator
         val indicators = arrayOfNulls<ImageView>(imageSliderAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
             LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
@@ -98,7 +100,7 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun setCurrentIndicator(index: Int){
-        val dotsIndicator: LinearLayout = findViewById(R.id.dotsIndicator)
+        val dotsIndicator: LinearLayout = binding.dotsIndicator
         val childCount = dotsIndicator.childCount
         for (i in 0 until childCount){
             val imageView = dotsIndicator[i] as ImageView

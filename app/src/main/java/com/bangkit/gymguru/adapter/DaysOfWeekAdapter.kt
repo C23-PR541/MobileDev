@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
+import com.bangkit.gymguru.databinding.ItemDayOfWeekBinding
 
 class DaysOfWeekAdapter(private val daysOfWeek: List<String>) :
     RecyclerView.Adapter<DaysOfWeekAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_day_of_week, parent, false)
-        return ViewHolder(view)
+        val binding = ItemDayOfWeekBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -24,11 +25,10 @@ class DaysOfWeekAdapter(private val daysOfWeek: List<String>) :
         return daysOfWeek.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val dayOfWeekTextView: TextView = itemView.findViewById(R.id.day_of_week_text)
+    inner class ViewHolder(private val binding: ItemDayOfWeekBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(dayOfWeek: String) {
-            dayOfWeekTextView.text = dayOfWeek
+            binding.dayOfWeekText.text = dayOfWeek
         }
     }
 }

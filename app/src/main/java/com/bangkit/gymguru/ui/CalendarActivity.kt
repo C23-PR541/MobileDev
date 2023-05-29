@@ -1,30 +1,36 @@
 package com.bangkit.gymguru.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.adapter.CalendarAdapter
+import com.bangkit.gymguru.adapter.DateAdapter
+import com.bangkit.gymguru.databinding.ActivityCalendarBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalendarActivity : AppCompatActivity() {
+class CalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener {
 
+    private lateinit var binding: ActivityCalendarBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CalendarAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_calendar)
+        binding = ActivityCalendarBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        recyclerView = findViewById(R.id.rv_calendar)
+        recyclerView = binding.rvCalendar
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val months = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
         val dates = generateDatesForYear(2023)
 
-        adapter = CalendarAdapter(months, dates)
+        adapter = CalendarAdapter(months, dates, this)
         recyclerView.adapter = adapter
     }
 
@@ -52,5 +58,10 @@ class CalendarActivity : AppCompatActivity() {
             dates.add(monthDates)
         }
         return dates
+    }
+
+    override fun onDateClicked(date: String) {
+        val year = 2023
+        Toast.makeText(this, "Clicked date: $date/$year", Toast.LENGTH_SHORT).show()
     }
 }
