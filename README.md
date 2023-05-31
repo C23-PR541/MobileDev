@@ -14,3 +14,9 @@ Week 2 Progress :
 - Creating Detail Page for each Tasks
 - Creating activity for classifying item and the result
 - Creating a Splash Screen for the app
+
+Week 3 Progress :
+- Creating Profile Menu
+- Creating Bottom Navigation
+- Creating BMI Calculator
+- 
