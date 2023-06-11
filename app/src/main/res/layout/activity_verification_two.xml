@@ -5,51 +5,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.VerificationTwoActivity"
-    android:padding="20dp"
+    android:padding="40dp"
     android:background="@color/primary_color">
 
     <TextView
         android:id="@+id/app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/brunoace_sc"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/page_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/montserrat"
-        android:text="@string/verif_email"
+        android:gravity="center"
+        android:text="Reset Password"
         android:textColor="@color/white"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/til_otp_code"
-        tools:layout_editor_absoluteX="20dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_otp_code"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/email_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="20dp">
+        android:layout_marginTop="75dp"
+        style="@style/CustomTextInputEditText"
+        app:layout_constraintTop_toBottomOf="@+id/page_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_otp_code"
+        <TextView
+            android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/verif_email"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_otp_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="@string/login_email"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email"
+            tools:layout_editor_absoluteX="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_otp_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_verify"
@@ -57,8 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="VERIFY"
-        app:layout_constraintTop_toBottomOf="@+id/til_otp_code"
+        android:text="RESET"
+        app:layout_constraintTop_toBottomOf="@+id/email_container"
         tools:layout_editor_absoluteX="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

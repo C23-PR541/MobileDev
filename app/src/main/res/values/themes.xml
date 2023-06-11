@@ -20,6 +20,77 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="ButtonSaveCustom">
+        <item name="android:background">@drawable/bg_buttons</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/black</item>
+        <item name="hintTextColor">@color/black</item>
+        <item name="startIconTint">@color/primary_color</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
+    <style name="CustomTextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:background">@drawable/bg_til</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+    </style>
+
+    <style name="MenuCustom">
+        <item name="android:background">@drawable/bg_menu</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="ContainerCustom">
+        <item name="android:background">@drawable/bg_container</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="TaskContainerCustom">
+        <item name="android:background">@drawable/bg_task_container</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="HistoryContainerCustom">
+        <item name="android:background">@drawable/bg_his_container</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
+    <style name="CVCustom">
+        <item name="android:background">@drawable/bg_profile</item>
+        <item name="fontFamily">@font/brunoace_sc</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

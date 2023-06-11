@@ -1,5 +1,6 @@
 package com.bangkit.gymguru.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.bangkit.gymguru.R
 import com.bangkit.gymguru.adapter.DateAdapter
 import com.bangkit.gymguru.adapter.DaysOfWeekAdapter
 import com.bangkit.gymguru.databinding.ActivityDetailCalendarBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,6 +51,43 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         binding.daysOfWeekRecyclerView.adapter = DaysOfWeekAdapter(listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"))
 
         calendarRecyclerView.adapter = dateAdapter
+
+        binding.fabAdd.setOnClickListener {
+            startActivity(Intent(this, AddTaskActivity::class.java))
+        }
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home_menu -> {
+                    // Handle home menu item click
+                    startActivity(Intent(this, CalendarActivity::class.java))
+                    true
+                }
+                R.id.camera_menu -> {
+                    // Handle camera menu item click
+                    startActivity(Intent(this, ClassifyActivity::class.java))
+                    true
+                }
+                R.id.history_menu -> {
+                    // Handle history menu item click
+                    startActivity(Intent(this, CalculatorActivity::class.java))
+                    true
+                }
+                R.id.profile_menu -> {
+                    // Handle profile menu item click
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
+        bottomNavigation.menu.findItem(R.id.home_menu).isEnabled = true
     }
 
     private fun generateDatesForMonth(year: Int, month: Int): List<String> {

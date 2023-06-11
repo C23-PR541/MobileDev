@@ -10,6 +10,7 @@ import com.bangkit.gymguru.R
 import com.bangkit.gymguru.adapter.CalendarAdapter
 import com.bangkit.gymguru.adapter.DateAdapter
 import com.bangkit.gymguru.databinding.ActivityCalendarBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,6 +33,40 @@ class CalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener {
 
         adapter = CalendarAdapter(months, dates, this)
         recyclerView.adapter = adapter
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home_menu -> {
+                    // Handle home menu item click
+                    true
+                }
+                R.id.camera_menu -> {
+                    // Handle camera menu item click
+                    startActivity(Intent(this, ClassifyActivity::class.java))
+                    true
+                }
+                R.id.history_menu -> {
+                    // Handle history menu item click
+                    startActivity(Intent(this, CalculatorActivity::class.java))
+                    true
+                }
+                R.id.profile_menu -> {
+                    // Handle profile menu item click
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Set the profile menu item as selected
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
+        bottomNavigation.menu.findItem(R.id.home_menu).isChecked = true
     }
 
     private fun generateDatesForYear(year: Int): List<List<String>> {

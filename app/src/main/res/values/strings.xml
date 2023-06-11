@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GymGuru</string>
+    <string name="app_name"><font color="@color/white">GymGuru</font></string>
     <string name="ill_title">Hello there!</string>
     <string name="ill_subtitle">Welcome to <b>GymGuru</b> \n
     <br><font color="#00C9B8"><b>Login</b></font> if you already have an account. \n</br>
@@ -41,4 +41,24 @@
     <string name="tools_name">Tool\'s Name</string>
     <string name="tutorial">Tutorial</string>
     <string name="save">Save</string>
+    <string name="home">Home</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
+    <string name="task_notes"><![CDATA[<notes>]]></string>
+    <string name="task_name">Yoga Class</string>
+    <string name="task_time">00:00-24:00</string>
+    <string name="task_date">Mon, 1 January 2023</string>
+
+    <string name="selected_item">Selected item:</string>
+    <string-array name="Gender">
+        <item>-- Select your Gender --</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="Tow">
+        <item>Yoga Class</item>
+        <item>Fitness</item>
+        <item>Poundfit</item>
+    </string-array>
 </resources>

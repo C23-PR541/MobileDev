@@ -16,6 +16,30 @@
         android:theme="@style/Theme.GymGuru"
         tools:targetApi="31">
         <activity
+            android:name=".ui.AddTaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.VideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.GraphicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CalculatorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.TaskDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.HistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ViewProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.CalendarActivity"
             android:exported="false" />
         <activity
@@ -53,8 +77,8 @@
             android:exported="false" />
         <activity
             android:name=".splashscreen.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
