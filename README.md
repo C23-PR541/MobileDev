@@ -19,4 +19,8 @@ Week 3 Progress :
 - Creating Profile Menu
 - Creating Bottom Navigation
 - Creating BMI Calculator
+
+Week 4 Progress :
+- Implement Machine Learning
+- Implement Firebase for Authentication Page
 - 
