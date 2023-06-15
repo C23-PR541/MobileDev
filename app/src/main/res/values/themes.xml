@@ -23,6 +23,14 @@
         <item name="strokeColor">@color/black</item>
     </style>
 
+    <style name="ButtonCustomTwo">
+        <item name="android:background">@drawable/bg_buttons</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="strokeColor">@color/black</item>
+    </style>
+
     <style name="ButtonSaveCustom">
         <item name="android:background">@drawable/bg_buttons</item>
         <item name="fontFamily">@font/brunoace_sc</item>

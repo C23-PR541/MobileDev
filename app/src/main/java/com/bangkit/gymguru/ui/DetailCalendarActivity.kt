@@ -3,17 +3,23 @@ package com.bangkit.gymguru.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.CalendarView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.adapter.DateAdapter
 import com.bangkit.gymguru.adapter.DaysOfWeekAdapter
+import com.bangkit.gymguru.adapter.TaskAdapter
+import com.bangkit.gymguru.data.Task
+import com.bangkit.gymguru.data.TaskView
 import com.bangkit.gymguru.databinding.ActivityDetailCalendarBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,6 +27,8 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
 
     private lateinit var binding: ActivityDetailCalendarBinding
     private lateinit var calendarRecyclerView: RecyclerView
+    private lateinit var rvTask: RecyclerView
+    private lateinit var taskAdapter: TaskAdapter
     private lateinit var dateAdapter: DateAdapter
     private val months = listOf(
         "January", "February", "March", "April", "May", "June",
@@ -35,6 +43,9 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         calendarRecyclerView = binding.calendarRecyclerView
         calendarRecyclerView.layoutManager = GridLayoutManager(this, 7)
 
+        rvTask = binding.rvTask
+        rvTask.layoutManager = LinearLayoutManager(this)
+
         val selectedMonthPosition = intent.getIntExtra("selectedMonthPosition", 0)
         val selectedMonth = months[selectedMonthPosition]
         val year = 2023
@@ -45,16 +56,17 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         dateAdapter = DateAdapter(this)
         dateAdapter.setDates(dates)
 
-        binding.monthTitle.text = "$selectedMonth"
+        binding.monthTitle.text = selectedMonth
 
         binding.daysOfWeekRecyclerView.layoutManager = GridLayoutManager(this, 7)
         binding.daysOfWeekRecyclerView.adapter = DaysOfWeekAdapter(listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"))
 
         calendarRecyclerView.adapter = dateAdapter
 
-        binding.fabAdd.setOnClickListener {
-            startActivity(Intent(this, AddTaskActivity::class.java))
-        }
+        Toast.makeText(this, "Click the dates to add Tasks", Toast.LENGTH_SHORT).show()
+
+        taskAdapter = TaskAdapter(emptyList()) // Initialize with an empty list
+        rvTask.adapter = taskAdapter
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
         bottomNavigation.setOnItemSelectedListener { item ->
@@ -82,12 +94,63 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
                 else -> false
             }
         }
+
+        retrieveTasksFromDatabase()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
-        bottomNavigation.menu.findItem(R.id.home_menu).isEnabled = true
+    private fun retrieveTasksFromDatabase() {
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+        val tasksReference = currentUserId?.let {
+            FirebaseDatabase.getInstance().reference.child("tasks").child(it)
+        }
+
+        if (tasksReference != null) {
+            tasksReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val taskList = mutableListOf<TaskView>()
+                    val selectedMonthPosition = intent.getIntExtra("selectedMonthPosition", 0)
+                    val selectedMonth = months[selectedMonthPosition]
+
+                    for (taskSnapshot in snapshot.children) {
+                        val taskData = taskSnapshot.getValue(Task::class.java)
+                        taskData?.let {
+                            val taskMonth = it.month
+
+                            if (taskMonth == selectedMonth) {
+                                val taskView = TaskView(
+                                    it.date,
+                                    it.tow,
+                                    it.time_start,
+                                    it.time_end
+                                )
+                                taskList.add(taskView)
+                            }
+                        }
+                    }
+
+                    taskAdapter.setTasks(taskList)
+                    taskAdapter.notifyDataSetChanged()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@DetailCalendarActivity,
+                        "Failed to retrieve tasks",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
+        }
+    }
+
+    override fun onDateClicked(date: String) {
+        val selectedMonthPosition = intent.getIntExtra("selectedMonthPosition", 0)
+        val selectedMonth = months[selectedMonthPosition]
+
+        val intent = Intent(this, AddTaskActivity::class.java)
+        intent.putExtra("selectedMonth", selectedMonth)
+        intent.putExtra("selectedDate", date)
+        startActivity(intent)
     }
 
     private fun generateDatesForMonth(year: Int, month: Int): List<String> {
@@ -98,10 +161,8 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
         val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
 
-        // Determine the offset to adjust the starting position of dates
         val offset = if (firstDayOfWeek == Calendar.SUNDAY) 6 else firstDayOfWeek - 2
 
-        // Add empty strings for the preceding days
         for (i in 0 until offset) {
             dates.add("")
         }
@@ -112,9 +173,5 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
             dates.add(date)
         }
         return dates
-    }
-
-    override fun onDateClicked(date: String) {
-        Toast.makeText(this, "Clicked date: $date", Toast.LENGTH_SHORT).show()
     }
 }

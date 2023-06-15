@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -40,8 +42,9 @@
             android:name=".ui.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.CalendarActivity"
-            android:exported="false" />
+            android:name=".splashscreen.SplashActivity"
+            android:exported="false"
+            android:theme="@style/SplashTheme"/>
         <activity
             android:name=".ui.ResultsActivity"
             android:exported="false" />
@@ -58,13 +61,7 @@
             android:name=".ui.UnlockActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.NewPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.VerificationTwoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.VerificationActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
@@ -76,9 +73,8 @@
             android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".splashscreen.SplashActivity"
-            android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:name=".ui.CalendarActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package com.bangkit.gymguru.ui
 
 import android.content.Intent
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bangkit.gymguru.R
@@ -15,6 +16,10 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val resViewText = intent.getStringExtra("resViewText")
+        val imageBitmap = intent.getParcelableExtra<Bitmap>("imageBitmap")
+
 
     }
 

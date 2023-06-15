@@ -1,8 +1,12 @@
 package com.bangkit.gymguru.splashscreen
 
+import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import androidx.core.view.isVisible
+import com.bangkit.gymguru.R
 import com.bangkit.gymguru.databinding.ActivitySplashBinding
 import com.bangkit.gymguru.ui.UnlockActivity
 
@@ -16,20 +20,20 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Delay the start of the main activity
-        val intent = Intent(this, UnlockActivity::class.java)
-        val splashTimer = object : Thread() {
-            override fun run() {
-                try {
-                    sleep(SPLASH_TIME_OUT)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                } finally {
-                    startActivity(intent)
-                    finish()
-                }
-            }
-        }
-        splashTimer.start()
+        // Delay the start of the UnlockActivity
+        val handler = Handler()
+        handler.postDelayed({
+            // Start the UnlockActivity after the specified SPLASH_TIME_OUT
+            val intent = Intent(this@SplashActivity, UnlockActivity::class.java)
+//            val options = ActivityOptions.makeSceneTransitionAnimation(this@SplashActivity).toBundle()
+            startActivity(intent /*, options*/)
+            finish()
+        }, SPLASH_TIME_OUT)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Make sure the splash screen is visible when the activity resumes
+        binding.root.isVisible = true
     }
 }

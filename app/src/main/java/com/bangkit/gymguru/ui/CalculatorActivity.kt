@@ -3,6 +3,7 @@ package com.bangkit.gymguru.ui
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
 import ai.onnxruntime.OrtSession
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -20,8 +21,6 @@ import java.nio.FloatBuffer
 class CalculatorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCalculatorBinding
-    private var isGenderSelected = false
-    private var previousSelectedPosition = 0
     private var selectedGenderValue = 0 // 0 for Female, 1 for Male
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,39 +64,32 @@ class CalculatorActivity : AppCompatActivity() {
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                    if (isGenderSelected) {
-                        // A gender other than "-- Select your Gender --" has already been selected
-                        if (position == 0) {
-                            spinner.setSelection(previousSelectedPosition) // Set the spinner to the previous selected position
-                        } else {
-                            previousSelectedPosition = position // Update the previous selected position
-                            selectedGenderValue = if (position == 1) 1 else 0 // Convert position to numeric value (0 or 1)
-                        }
-                    } else {
-                        isGenderSelected = true
-                        previousSelectedPosition = position // Set the initial selected position
-                        selectedGenderValue = if (position == 1) 1 else 0 // Convert position to numeric value (0 or 1)
+                    val selectedGender = parent.getItemAtPosition(position) as String
+                    if (selectedGender == "Female") {
+                        selectedGenderValue = 0
+                    } else if (selectedGender == "Male") {
+                        selectedGenderValue = 1
                     }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
+                    Toast.makeText(this@CalculatorActivity, "Please select gender", Toast.LENGTH_LONG).show()
                 }
             }
         }
 
         binding.btnPredict.setOnClickListener {
             val gender = selectedGenderValue.toFloat()
-            val age = textInputEditTextAge.text.toString().toFloat()
-            Log.d("TAG", "Age = ${age.toInt()}")
-            val weight = textInputEditTextWeight.text.toString().toFloat()
-            val height = textInputEditTextHeight.text.toString().toFloat()
-            val hours = textInputEditTextHours.text.toString().toFloat()
-            val years = textInputEditTextYears.text.toString().toFloat()
-            val bmi = (weight?.div(((height?.div(100))?.times((height?.div(100)!!))!!))).toString().toFloat()
-            Log.d("TAG", "BMI = $bmi")
-            val inputs = floatArrayOf(gender, age, weight, height, hours, years, bmi)
-            if (inputs != null) {
+            val age = textInputEditTextAge.text.toString().toFloatOrNull()
+            val weight = textInputEditTextWeight.text.toString().toFloatOrNull()
+            val height = textInputEditTextHeight.text.toString().toFloatOrNull()
+            val hours = textInputEditTextHours.text.toString().toFloatOrNull()
+            val years = textInputEditTextYears.text.toString().toFloatOrNull()
+
+            if (age != null && weight != null && height != null && hours != null && years != null) {
+                val bmi = weight / ((height / 100) * (height / 100))
+                val inputs = floatArrayOf(gender, age, weight, height, hours, years, bmi)
+
                 val ortEnvironment = OrtEnvironment.getEnvironment()
                 val ortSession = createORTSession(ortEnvironment)
                 val output = runPrediction(inputs, ortSession, ortEnvironment)
@@ -129,8 +121,8 @@ class CalculatorActivity : AppCompatActivity() {
 
     fun showOutputPopup(output: Long, bmi: Float) {
         val outputText = when (output) {
-            0L -> "You are overweight with a BMI value of $bmi. Do weight loss"
-            1L -> "Muscle Up"
+            0L -> "You are overweight with a BMI value of $bmi. \nDo Weight Loss"
+            1L -> "You are underweight with a BMI value of $bmi. \nDo Muscle Up"
             else -> "Unknown"
         }
 
@@ -157,5 +149,11 @@ class CalculatorActivity : AppCompatActivity() {
         btnClose.setOnClickListener {
             dialog.dismiss() // Close the dialog when the button is clicked
         }
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, CalendarActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
     }
 }
