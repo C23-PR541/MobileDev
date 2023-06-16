@@ -2,9 +2,12 @@ package com.bangkit.gymguru.splashscreen
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.core.view.isVisible
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.databinding.ActivitySplashBinding
@@ -29,6 +32,20 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent /*, options*/)
             finish()
         }, SPLASH_TIME_OUT)
+        setupView()
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
     }
 
     override fun onResume() {

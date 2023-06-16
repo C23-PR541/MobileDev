@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
@@ -13,24 +14,35 @@
     card_view:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:background="@color/calendar_background">
+        android:background="#A9CCD7">
 
         <TextView
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:textStyle="bold"
             android:textColor="@color/black"
             card_view:layout_constraintStart_toEndOf="@id/item_pic"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             tools:text="Item Name" />
+
+        <TextView
+            android:id="@+id/item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="dd month year"
+            android:fontFamily="@font/poppins_medium"
+            card_view:layout_constraintTop_toBottomOf="@id/item_name"
+            card_view:layout_constraintStart_toEndOf="@id/item_pic"
+            card_view:layout_constraintBottom_toBottomOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_pic"

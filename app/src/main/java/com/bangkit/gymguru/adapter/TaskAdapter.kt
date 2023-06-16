@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.gymguru.R
 import com.bangkit.gymguru.data.TaskView
+import org.w3c.dom.Text
 
-class TaskAdapter(private var tasks: List<TaskView>) :
+class TaskAdapter(private var tasks: List<TaskView>, private val itemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,11 +32,20 @@ class TaskAdapter(private var tasks: List<TaskView>) :
         holder.taskNameTextView.text = currentTask.tow
         holder.timeStartTextView.text = currentTask.time_start
         holder.timeEndTextView.text = currentTask.time_end
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(currentTask)
+        }
     }
 
     override fun getItemCount() = tasks.size
 
     fun setTasks(tasks: List<TaskView>) {
         this.tasks = tasks
+        notifyDataSetChanged()
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(task: TaskView)
     }
 }

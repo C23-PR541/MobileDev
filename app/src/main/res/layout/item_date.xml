@@ -9,7 +9,8 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
         android:gravity="center"
         android:padding="4dp" />
 

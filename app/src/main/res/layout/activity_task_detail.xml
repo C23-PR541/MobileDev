@@ -42,8 +42,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/task_date"
+        android:fontFamily="@font/poppins_extra_bold"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +79,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/task_time"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_semi_bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +106,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:text="@string/task_name"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +136,8 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:text="@string/task_notes"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +146,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_container"
@@ -150,35 +157,26 @@
         app:layout_constraintTop_toBottomOf="@id/task_detail_container">
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonSaveCustom"
-            android:layout_width="150dp"
+            style="@style/ButtonEditCustom"
+            android:id="@+id/btn_edit"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:text="Edit"
-            android:background="#FFA500"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonSaveCustom"
-            android:layout_width="150dp"
+            style="@style/ButtonDeleteCustom"
+            android:id="@+id/btn_delete"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="40dp"
             android:text="Delete"
-            android:background="#FF0000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/primary_color"
-        app:itemIconTint="@color/bottom_navigation_icon_color"
-        app:itemTextColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

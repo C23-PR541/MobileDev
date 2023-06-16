@@ -2,6 +2,7 @@ package com.bangkit.gymguru.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +15,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class AddTaskActivity : AppCompatActivity() {
 
@@ -35,6 +39,14 @@ class AddTaskActivity : AppCompatActivity() {
         val tow = resources.getStringArray(R.array.Tow)
         val selectedMonth = intent.getStringExtra("selectedMonth")
         val selectedDate = intent.getStringExtra("selectedDate")
+
+        val textInputEditTextStart = binding.tedTimeStart
+        val placeholderStart = "00:00"
+        textInputEditTextStart.hint = placeholderStart
+
+        val textInputEditTextEnd = binding.tedTimeTwo
+        val placeholderEnd = "23:59"
+        textInputEditTextEnd.hint = placeholderEnd
 
         val spinner = binding.towSpinner
         if (spinner != null) {
@@ -61,6 +73,38 @@ class AddTaskActivity : AppCompatActivity() {
             val time_end = binding.tedTimeTwo.text.toString()
             val notes = binding.tedNotes.text.toString()
 
+            if (time_start.isEmpty() || time_end.isEmpty() || notes.isEmpty()) {
+                Toast.makeText(
+                    this@AddTaskActivity,
+                    "Please input all data",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidTime(time_start) || !isValidTime(time_end)) {
+                Toast.makeText(
+                    this@AddTaskActivity,
+                    "Invalid time format. \nPlease enter a valid time (00:00 - 24:00)",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            // Convert time strings to Date objects
+            val startTime = SimpleDateFormat("HH:mm", Locale.getDefault()).parse(time_start)
+            val endTime = SimpleDateFormat("HH:mm", Locale.getDefault()).parse(time_end)
+
+            if (startTime != null && endTime != null && startTime.after(endTime)) {
+                Toast.makeText(
+                    this@AddTaskActivity,
+                    "Start time cannot be greater than end time",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
+            // Rest of your code to store the task in the database
             currentUserId?.let { userId ->
                 val taskReference = database.reference.child("tasks").child(userId).push()
                 val taskId = taskReference.key
@@ -72,6 +116,7 @@ class AddTaskActivity : AppCompatActivity() {
                 taskData["time_start"] = time_start
                 taskData["time_end"] = time_end
                 taskData["notes"] = notes
+                taskData["taskId"] = taskId!!
 
                 taskId?.let {
                     taskReference.setValue(taskData)
@@ -94,5 +139,10 @@ class AddTaskActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun isValidTime(time: String): Boolean {
+        val pattern = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$".toRegex()
+        return time.matches(pattern)
     }
 }

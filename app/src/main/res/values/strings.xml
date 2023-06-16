@@ -11,14 +11,16 @@
     <string name="login_email">Enter your Email</string>
     <string name="login_password">Enter your Password</string>
     <string name="login_forgot_pw">Forgot password?</string>
-    <string name="login_no_account">I don\'t have an account <font color="#00C9B8">Register</font></string>
+    <string name="login_no_account">I don\'t have an account.</string>
+    <string name="tv_noAcc"><font color="#00C9B8"> Register</font></string>
 
     <string name="tv_regis">REGISTER</string>
     <string name="confirm_password">Confirm your Password</string>
     <string name="register_password">Enter your Password</string>
     <string name="register_email">Enter your Email</string>
     <string name="register_name">Enter your Name</string>
-    <string name="register_have_account">Already have an account? <font color="#00C9B8">Login</font></string>
+    <string name="register_have_account">Already have an account?</string>
+    <string name="tv_haveAcc"><font color="#00C9B8"> Login</font></string>
 
     <string name="intro_one_desc">Healthy Together!</string>
     <string name="intro_two_desc">Thank you for joining GymGuru. \nBy signing up, you are ready for a healthy life. Providing the best health knowledge for you is Our Top Priority.</string>
@@ -44,8 +46,8 @@
     <string name="profile">Profile</string>
     <string name="task_notes"><![CDATA[<notes>]]></string>
     <string name="task_name">Yoga Class</string>
-    <string name="task_time">00:00-24:00</string>
-    <string name="task_date">Mon, 1 January 2023</string>
+    <string name="task_time">00:00 - 24:00</string>
+    <string name="task_date">1 January 2023</string>
 
     <string name="selected_item">Selected item:</string>
     <string-array name="Gender">

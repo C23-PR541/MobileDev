@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener {
+class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener, TaskAdapter.OnItemClickListener {
 
     private lateinit var binding: ActivityDetailCalendarBinding
     private lateinit var calendarRecyclerView: RecyclerView
@@ -65,7 +65,7 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
 
         Toast.makeText(this, "Click the dates to add Tasks", Toast.LENGTH_SHORT).show()
 
-        taskAdapter = TaskAdapter(emptyList()) // Initialize with an empty list
+        taskAdapter = TaskAdapter(emptyList(), this) // Initialize with an empty list
         rvTask.adapter = taskAdapter
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.navigation_view)
@@ -98,6 +98,19 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         retrieveTasksFromDatabase()
     }
 
+    override fun onItemClick(task: TaskView) {
+        val intent = Intent(this, TaskDetailActivity::class.java)
+        intent.putExtra("date", task.date)
+        intent.putExtra("tow", task.tow)
+        intent.putExtra("time_start", task.time_start)
+        intent.putExtra("time_end", task.time_end)
+        intent.putExtra("month", binding.monthTitle.text.toString())
+        intent.putExtra("notes", task.notes)
+        intent.putExtra("taskId", task.taskId)
+        intent.putExtra("year", "2023")
+        startActivity(intent)
+    }
+
     private fun retrieveTasksFromDatabase() {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val tasksReference = currentUserId?.let {
@@ -105,7 +118,7 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
         }
 
         if (tasksReference != null) {
-            tasksReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            tasksReference.orderByChild("date").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val taskList = mutableListOf<TaskView>()
                     val selectedMonthPosition = intent.getIntExtra("selectedMonthPosition", 0)
@@ -121,12 +134,17 @@ class DetailCalendarActivity : AppCompatActivity(), DateAdapter.DateClickListene
                                     it.date,
                                     it.tow,
                                     it.time_start,
-                                    it.time_end
+                                    it.time_end,
+                                    it.notes,
+                                    it.taskId
                                 )
                                 taskList.add(taskView)
                             }
                         }
                     }
+
+                    // Sort the taskList based on date
+                    taskList.sortBy { it.date }
 
                     taskAdapter.setTasks(taskList)
                     taskAdapter.notifyDataSetChanged()

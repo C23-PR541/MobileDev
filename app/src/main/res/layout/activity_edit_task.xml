@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddTaskActivity"
+    tools:context=".ui.EditTaskActivity"
     android:background="@color/secondary_color"
     android:padding="20dp">
 
@@ -167,11 +167,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/ButtonSaveCustom"
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_save"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="ADD"
+        android:text="Save"
         android:onClick="showOutputPopup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

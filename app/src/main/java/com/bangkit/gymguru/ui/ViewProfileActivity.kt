@@ -2,6 +2,7 @@ package com.bangkit.gymguru.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -47,33 +48,49 @@ class ViewProfileActivity : AppCompatActivity() {
                         val user = userSnapshot.getValue(Users::class.java)
                         user?.let {
                             val name = user.name
-                            binding.etName.setText(name)
+                            if(name != null) {
+                                binding.etName.setText(name)
+                            } else{
+                                val textInputEditTextName = binding.etName
+                                val placeholderName = "Enter your Name"
+                                textInputEditTextName.inputType = InputType.TYPE_CLASS_TEXT
+                                textInputEditTextName.hint = placeholderName
+                            }
 
                             val age = user.age
                             if (age != null) {
                                 binding.etAge.setText(age.toString())
                             } else {
-                                binding.etAge.setText("")
+                                val textInputEditTextAge = binding.etAge
+                                val placeholderAge = "... Years"
+                                textInputEditTextAge.inputType = InputType.TYPE_CLASS_NUMBER
+                                textInputEditTextAge.hint = placeholderAge
                             }
 
                             val weight = user.weight
                             if (weight != null) {
                                 binding.etWeight.setText(weight.toString())
                             } else {
-                                binding.etWeight.setText("")
+                                val textInputEditTextWeight = binding.etWeight
+                                val placeholderWeight = "... KG"
+                                textInputEditTextWeight.inputType = InputType.TYPE_CLASS_NUMBER
+                                textInputEditTextWeight.hint = placeholderWeight
                             }
 
                             val height = user.height
                             if (height != null) {
                                 binding.etHeight.setText(height.toString())
                             } else {
-                                binding.etHeight.setText("")
+                                val textInputEditTextHeight = binding.etHeight
+                                val placeholderHeight = "... CM"
+                                textInputEditTextHeight.inputType = InputType.TYPE_CLASS_NUMBER
+                                textInputEditTextHeight.hint = placeholderHeight
                             }
 
                             val gender = user.gender
                             if (gender != null) {
                                 selectedGender = gender
-                                val genderPosition = if (gender == "Female") 0 else 1
+                                val genderPosition = if (gender == "Male") 0 else 1
                                 binding.genderSpinner.setSelection(genderPosition)
                             }
                         }

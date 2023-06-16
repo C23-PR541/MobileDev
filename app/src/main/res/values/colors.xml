@@ -10,11 +10,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey_light">#F0F0F0</color>
-    <color name="grey_light2">#66D3D3D3</color>
+    <color name="task_container">#26264653</color>
     <color name="dark_grey">#5A5A5A</color>
     <color name="calendar_background">#4C8CA6</color>
     <color name="text">#264653</color>
     <color name="dots_active">#808080</color>
     <color name="dots_inactive">#D9D9D9</color>
     <color name="disabledMenuItemColor">#F0F0F0</color>
+    <color name="taskDateBackground">#FFA500</color>
 </resources>

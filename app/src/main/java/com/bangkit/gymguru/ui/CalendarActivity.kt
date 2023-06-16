@@ -3,8 +3,12 @@ package com.bangkit.gymguru.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import android.window.SplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +19,7 @@ import com.bangkit.gymguru.adapter.DateAdapter
 import com.bangkit.gymguru.databinding.ActivityCalendarBinding
 import com.bangkit.gymguru.splashscreen.SplashActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,6 +29,7 @@ class CalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: CalendarAdapter
     private lateinit var prefs: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,5 +122,19 @@ class CalendarActivity : AppCompatActivity(), DateAdapter.DateClickListener {
     override fun onDateClicked(date: String) {
         val year = 2023
         Toast.makeText(this, "Clicked date: $date/$year", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+        // Check if the user is logged in
+        val userId = prefs.getString("uid", null)
+        val name = prefs.getString("name", null)
+
+        if (userId != null && name != null) {
+            // User is logged in, close the app
+            finishAffinity() // Close all activities in the task
+        } else {
+            // User is not logged in, perform default back button behavior
+            super.onBackPressed()
+        }
     }
 }

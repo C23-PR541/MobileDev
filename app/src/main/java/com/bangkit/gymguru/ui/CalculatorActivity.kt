@@ -121,8 +121,8 @@ class CalculatorActivity : AppCompatActivity() {
 
     fun showOutputPopup(output: Long, bmi: Float) {
         val outputText = when (output) {
-            0L -> "You are overweight with a BMI value of $bmi. \nDo Weight Loss"
-            1L -> "You are underweight with a BMI value of $bmi. \nDo Muscle Up"
+            0L -> "You are overweight with a BMI value of $bmi. \n\nDo Weight Loss"
+            1L -> "You are underweight with a BMI value of $bmi. \n\nDo Muscle Up"
             else -> "Unknown"
         }
 

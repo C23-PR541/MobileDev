@@ -1,9 +1,12 @@
 package com.bangkit.gymguru.ui
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -75,6 +78,20 @@ class IntroActivity : AppCompatActivity() {
         val tvSkip: TextView = binding.tvSkip
         tvSkip.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+        setupView()
+    }
+
+    private fun setupView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
         }
     }
 

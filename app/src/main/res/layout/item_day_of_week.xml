@@ -9,6 +9,7 @@
         android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:textSize="10sp"
+        android:fontFamily="@font/poppins_semi_bold"
         android:textColor="@color/black"
         android:gravity="center"
         android:padding="8dp" />
