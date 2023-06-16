@@ -23,4 +23,7 @@ Week 3 Progress :
 Week 4 Progress :
 - Implement Machine Learning
 - Implement Firebase for Authentication Page
-- 
+- Adding add task, edit task, and delete task feature
+- Adding classification result data to Firebase Storage and Firebase Realtime Database
+- Retreive and display classification result data into History Page
+- Adding notification to the app
